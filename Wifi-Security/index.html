@@ -75,30 +75,23 @@
         /* HEADER */
         header {
             position: relative;
-            background: var(--main-bg);
+            background: linear-gradient(135deg, #3a3a8e, #6868c2);
             color: #fff;
-            padding: 120px 20px 80px 20px;
+            padding: 100px 20px 0;
             text-align: center;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
             overflow: hidden;
-            margin-top: 60px; /* ensures header is visible below nav */
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
         }
 
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background:
-                linear-gradient(rgba(58, 58, 142, 0.2), rgba(58, 58, 142, 0.2)),
-                url('Wifi-Security/wifi_logo.png') repeat; 
-            background-size: 200px 200px; 
-            opacity: 0.1; 
-            transform: rotate(10deg) translateY(-20px);
-            transform-origin: center;
-            pointer-events: none;
-            z-index: 0;
-            animation: movePattern 30s linear infinite;
+        header::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 80px;
+        background-size: cover;
         }
 
         @keyframes movePattern {
@@ -117,16 +110,12 @@
         }
 
         header h1 {
-            position: relative; 
-            z-index: 1;
-            margin: 0;
-            font-size: 2.4em;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            opacity: 0;
-            transform: translateY(-20px) scale(0.95);
-            animation: fadeInScale 1s ease forwards;
+        font-size: 3em;
+        font-weight: 700;
+        }
+
+        header {
+        padding: 60px 20px 100px;
         }
 
         header h1 i {
