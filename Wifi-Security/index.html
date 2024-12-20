@@ -52,7 +52,7 @@
             margin: 0;
             padding: 0;
             display: flex;
-            gap: 20px;
+            gap: 12px;
             align-items: center;
         }
 
@@ -128,6 +128,7 @@
             padding: 20px;
             background: #fff;
             transform: translateY(20px);
+            scroll-margin-top: 100px;
             opacity: 0;
             cursor: pointer;
             position: relative;
@@ -196,49 +197,71 @@
         }
 
         /* RESPONSIVE DESIGN */
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 1.8em;
-            }
-            .card p {
-                font-size: 0.95em;
-            }
-            .container {
-                margin: -40px auto 20px auto;
-                padding: 30px 15px;
-            }
-            
-            /* Mobile Nav */
-            .menu-toggle {
-                display: block;
-                color: var(--main-color);
-            }
-            
-            nav ul {
-                display: none; /* Hide menu by default */
-                flex-direction: column;
-                gap: 10px;
-                margin-top: 10px;
-            }
+@media (max-width: 300px) {
+    header h1 {
+        font-size: 1em; /* Slightly larger for better visibility */
+        text-align: center; /* Ensure it stays centered */
+    }
 
-            nav.active ul {
-                display: flex; /* Show menu when nav is active */
-            }
+    .card p {
+        font-size: 1em; /* Improved readability */
+        line-height: 1.5; /* Add better spacing between lines */
+    }
 
-            nav {
-                flex-direction: column;
-                align-items: center;
-                padding: 8px 15px;
-                width: 90%;
-            }
+    .container {
+        margin: 20px auto 40px auto; /* Reset negative margin */
+        padding: 20px 15px; /* Adjust padding for smaller screens */
+        width: 95%; /* Add slight width constraint */
+    }
+    
+    /* Mobile Nav */
+    .menu-toggle {
+        display: block; /* Ensure toggle is visible */
+        color: var(--main-color);
+        font-size: 1.2em; /* Better size for touch screens */
+    }
+    
+    nav ul {
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 15px;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        transform: translateY(-10px);
+    }
 
-            nav a {
-                font-size: 1em;
-                padding: 8px;
-                width: 100%;
-                text-align: center;
-            }
-        }
+    nav.active ul {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px; /* Slightly reduced padding */
+        width: 95%; /* Ensure it fits better on narrow screens */
+        background-color: #f9f9f9; /* Optional: Add a subtle background */
+        border-radius: 8px; /* Optional: Rounded corners for a modern look */
+    }
+
+    nav a {
+        font-size: 1.1em; /* Slightly larger for readability */
+        padding: 10px; /* Increase padding for better tap targets */
+        width: 100%;
+        text-align: center;
+        background-color: #ffffff; /* Optional: Add a background to links */
+        border: 1px solid #ddd; /* Optional: Add border for clarity */
+        border-radius: 5px; /* Rounded corners */
+    }
+
+    nav a:hover {
+        background-color: var(--main-color); /* Optional: Add hover effect */
+        color: #fff; /* Contrast text color on hover */
+    }
+
+    }
     </style>
 </head>
 <body>
