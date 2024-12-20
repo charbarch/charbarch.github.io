@@ -70,35 +70,39 @@
             overflow: hidden;
             margin-top: 60px; /* to ensure header is below the navbar */
         }
-        
+
         /* Pseudo-element with angled pattern and subtle animation */
         header::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: url('wifi_logo_light.png') repeat;
-            background-size: 80px 80px; /* Adjust as needed */
-            opacity: 0.05; /* Lower opacity for a subtle watermark effect */
-            transform: rotate(15deg) translateY(-20px);
+            /* Add a tinted overlay on top of the logo pattern to achieve a lighter blue shade */
+            background:
+                linear-gradient(rgba(58, 58, 142, 0.2), rgba(58, 58, 142, 0.2)),
+                url('wifi_logo.png') repeat; 
+            /* Increase the background size to space out logos */
+            background-size: 200px 200px; 
+            /* Make them subtle and elegant */
+            opacity: 0.1; 
+            transform: rotate(10deg) translateY(-20px);
             transform-origin: center;
-            mix-blend-mode: overlay; /* Blend softly with the gradient */
             pointer-events: none;
             z-index: 0;
-            animation: movePattern 20s linear infinite;
+            animation: movePattern 30s linear infinite;
         }
 
-        /* Adjusting the animation to be more subtle */
+        /* Subtly animate the pattern for a gentle, elegant movement */
         @keyframes movePattern {
             0% {
-                transform: rotate(15deg) translateY(-20px) translateX(0);
+                transform: rotate(10deg) translateY(-20px) translateX(0);
                 background-position: 0 0;
             }
             50% {
-                transform: rotate(15deg) translateY(-10px) translateX(10px);
-                background-position: 20px 20px;
+                transform: rotate(10deg) translateY(-10px) translateX(10px);
+                background-position: 100px 100px;
             }
             100% {
-                transform: rotate(15deg) translateY(-20px) translateX(0);
+                transform: rotate(10deg) translateY(-20px) translateX(0);
                 background-position: 0 0;
             }
         }
