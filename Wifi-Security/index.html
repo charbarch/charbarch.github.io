@@ -70,31 +70,32 @@
             overflow: hidden;
             margin-top: 60px; /* to ensure header is below the navbar */
         }
-
-        /* Pseudo-element with angled pattern and animation */
+        
+        /* Pseudo-element with angled pattern and subtle animation */
         header::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: url('wifi_logo.png') repeat;
+            background: url('wifi_logo_light.png') repeat;
             background-size: 80px 80px; /* Adjust as needed */
-            opacity: 0.1; /* Make it faint */
+            opacity: 0.05; /* Lower opacity for a subtle watermark effect */
             transform: rotate(15deg) translateY(-20px);
             transform-origin: center;
-            mix-blend-mode: overlay; /* Blend with the gradient background */
+            mix-blend-mode: overlay; /* Blend softly with the gradient */
             pointer-events: none;
             z-index: 0;
             animation: movePattern 20s linear infinite;
         }
 
+        /* Adjusting the animation to be more subtle */
         @keyframes movePattern {
             0% {
                 transform: rotate(15deg) translateY(-20px) translateX(0);
                 background-position: 0 0;
             }
             50% {
-                transform: rotate(15deg) translateY(-10px) translateX(20px);
-                background-position: 40px 40px;
+                transform: rotate(15deg) translateY(-10px) translateX(10px);
+                background-position: 20px 20px;
             }
             100% {
                 transform: rotate(15deg) translateY(-20px) translateX(0);
