@@ -44,7 +44,7 @@
             padding: 8px 20px;
             display: flex;
             align-items: center;
-            transition: height 0.3s ease;
+            transition: top 0.3s ease; /* Smooth hide/show */
         }
 
         nav ul {
@@ -319,11 +319,12 @@
         // Toggle menu on mobile
         const menuToggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('nav');
-
+    
         menuToggle.addEventListener('click', () => {
             nav.classList.toggle('active');
+            nav.style.transition = 'transform 0.3s ease, opacity 0.3s ease'; // Ensure smooth transition
         });
-
+    
         // Smooth scrolling
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -333,13 +334,13 @@
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
-
+    
         // Intersection Observer for staggered card animation
         const cards = document.querySelectorAll('.card');
         const observerOptions = {
             threshold: 0.1
         };
-
+    
         let delay = 0;
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -351,15 +352,15 @@
                 }
             });
         }, observerOptions);
-
+    
         cards.forEach((card) => {
             observer.observe(card);
         });
-
+    
         // Active navigation highlighting
         const sections = document.querySelectorAll('.card');
         const navLinks = document.querySelectorAll('nav a');
-
+    
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -369,11 +370,11 @@
                 }
             });
         }, { threshold: 0.5 });
-
+    
         sections.forEach(section => {
             sectionObserver.observe(section);
         });
-
+    
         // Add CSS for active navigation link
         const style = document.createElement('style');
         style.textContent = `
@@ -384,6 +385,6 @@
             }
         `;
         document.head.appendChild(style);
-    </script>
+    </script>    
 </body>
 </html>
