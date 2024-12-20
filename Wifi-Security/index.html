@@ -7,7 +7,9 @@
     <title>Wi-Fi Security Essentials</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Using Inter font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-OPmYcX7Ip4LGToDcH/AABFdndfXmEEXXttwFEXGvDxPiAsTTwPvzffkNUZDqTQXvqUHtG8PfUDX7rCHkSHRZeA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
@@ -28,79 +30,151 @@
             overflow-x: hidden;
         }
 
+        /* NAVIGATION BAR */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            background: #fff;
-            border-bottom: 1px solid #ddd;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffffcc; /* slight transparency */
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 9999;
+            padding: 8px 20px;
         }
+
         nav ul {
             list-style: none;
             margin: 0;
-            padding: 10px 20px;
+            padding: 0;
             display: flex;
             gap: 20px;
             align-items: center;
         }
+
+        nav li {
+            display: inline-block;
+        }
+
         nav a {
             text-decoration: none;
             color: var(--main-color);
             font-weight: 600;
             transition: color 0.3s ease;
-        }
-        nav a:hover, nav a.active {
-            color: var(--accent-color);
-            font-weight: 700;
+            font-size: 0.95em;
+            padding: 6px 8px;
+            border-radius: 8px;
         }
 
+        nav a:hover {
+            color: var(--accent-color);
+            background: #f0faff; 
+        }
+
+        /* HEADER */
         header {
+            position: relative;
             background: var(--main-bg);
             color: #fff;
-            padding: 80px 20px;
+            padding: 120px 20px 80px 20px;
             text-align: center;
-            margin-top: 60px;
+            overflow: hidden;
+            margin-top: 60px; /* ensures header is visible below nav */
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                linear-gradient(rgba(58, 58, 142, 0.2), rgba(58, 58, 142, 0.2)),
+                url('Wifi-Security/wifi_logo.png') repeat; 
+            background-size: 200px 200px; 
+            opacity: 0.1; 
+            transform: rotate(10deg) translateY(-20px);
+            transform-origin: center;
+            pointer-events: none;
+            z-index: 0;
+            animation: movePattern 30s linear infinite;
+        }
+
+        @keyframes movePattern {
+            0% {
+                transform: rotate(10deg) translateY(-20px) translateX(0);
+                background-position: 0 0;
+            }
+            50% {
+                transform: rotate(10deg) translateY(-10px) translateX(10px);
+                background-position: 100px 100px;
+            }
+            100% {
+                transform: rotate(10deg) translateY(-20px) translateX(0);
+                background-position: 0 0;
+            }
         }
 
         header h1 {
-            font-size: 2.5em;
-            display: flex;
+            position: relative; 
+            z-index: 1;
+            margin: 0;
+            font-size: 2.4em;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
-            animation: fadeIn 1s ease;
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+            animation: fadeInScale 1s ease forwards;
         }
 
-        @keyframes fadeIn {
-            from {
+        header h1 i {
+            font-size: 1.2em;
+            color: var(--accent-color);
+        }
+
+        @keyframes fadeInScale {
+            0% {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-20px) scale(0.95);
             }
-            to {
+            100% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
+        /* CONTAINER */
         .container {
             max-width: 900px;
-            margin: -50px auto 40px;
+            margin: -50px auto 40px auto;
             padding: 40px 20px;
             background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 2;
+            animation: floatNotch 3s ease-in-out infinite alternate;
         }
 
+        @keyframes floatNotch {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(5px); }
+        }
+
+        /* CARDS */
         .card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            border: 1px solid #eee;
+            border-radius: 12px;
             margin-bottom: 20px;
             padding: 20px;
             background: #fff;
-            opacity: 0;
             transform: translateY(20px);
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .card.visible {
@@ -108,21 +182,77 @@
             transform: translateY(0);
         }
 
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 12px;
+            background: linear-gradient(45deg, var(--accent-color), var(--main-color));
+            opacity: 0.1;
+            z-index: -1;
+        }
+
         .card h3 {
+            margin-top: 0;
             color: var(--main-color);
-            font-size: 1.4em;
+            font-size: 1.3em;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
+        .card h3 i {
+            color: var(--accent-color);
+        }
+
+        .card p {
+            margin: 10px 0;
+            line-height: 1.6em;
+            font-size: 1em;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--main-color);
+        }
+
+        /* FOOTER */
         footer {
             text-align: center;
             padding: 15px;
             background: var(--main-color);
             color: #fff;
+            font-size: 0.9em;
             margin-top: 40px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            .card p {
+                font-size: 0.95em;
+            }
+            .container {
+                margin: -40px auto 20px auto;
+                padding: 30px 15px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
@@ -139,7 +269,7 @@
     </nav>
 
     <header>
-        <h1><i class="fas fa-wifi"></i> Wi-Fi Security Essentials</h1>
+        <h1><i class="fas fa-wifi"></i>Wi-Fi Security Essentials</h1>
     </header>
 
     <div class="container">
@@ -151,6 +281,7 @@
             <p><strong>Tools:</strong> Aircrack-ng, Reaver, Fern Wi-Fi Cracker</p>
             <p><strong>How it got patched:</strong> WEP was replaced by WPA and eventually WPA2, as its fundamental flaws couldn’t be simply patched.</p>
         </div>
+
         <div class="card" id="wpa">
             <h3><i class="fas fa-shield-alt"></i> WPA (Wi-Fi Protected Access)</h3>
             <p><strong>What it is:</strong> WPA was an interim solution replacing WEP. It introduced TKIP, making key changes more frequent.</p>
@@ -159,6 +290,7 @@
             <p><strong>Tools:</strong> Aircrack-ng, Cowpatty, Pyrit</p>
             <p><strong>How it got patched:</strong> WPA2 replaced WPA’s TKIP with AES, a stronger encryption method.</p>
         </div>
+
         <div class="card" id="wpa2">
             <h3><i class="fas fa-user-shield"></i> WPA2</h3>
             <p><strong>What it is:</strong> WPA2 introduced AES encryption, making it much harder to crack than WPA or WEP.</p>
@@ -167,6 +299,7 @@
             <p><strong>Tools:</strong> Aircrack-ng, hcxdumptool, hashcat</p>
             <p><strong>Notes:</strong> Pure WPA2 (AES-only) avoids vulnerabilities introduced by TKIP/WPA fallback modes.</p>
         </div>
+
         <div class="card" id="wpa3">
             <h3><i class="fas fa-key"></i> WPA3</h3>
             <p><strong>What it is:</strong> The latest standard, WPA3, enhances Wi-Fi security with robust encryption even if users choose weaker passwords.</p>
@@ -174,14 +307,16 @@
             <p><strong>Common Attacks:</strong> Dragonblood</p>
             <p><strong>Tools:</strong> hcxdumptool, hashcat</p>
         </div>
+
         <div class="card" id="wps">
             <h3><i class="fas fa-plug"></i> WPS (Wi-Fi Protected Setup)</h3>
             <p><strong>What it is:</strong> Simplifies connecting devices without typing long passwords, using PINs or push-button methods.</p>
-            <p><strong>Vulnerability:</strong> PIN-based WPS can be brute-forced, making it a target.</p>
+            <p><strong>Vulnerability:</strong> PIN-based WPS can be brute forced, making it a target.</p>
             <p><strong>Common Attacks:</strong> Pixie Dust Attack, WPS PIN brute force</p>
             <p><strong>Tools:</strong> Reaver, Pixiewps</p>
             <p><strong>Solution:</strong> Disable WPS if not needed.</p>
         </div>
+
         <div class="card" id="macfiltering">
             <h3><i class="fas fa-network-wired"></i> MAC Filtering</h3>
             <p><strong>What it is:</strong> Allows/denies devices by MAC address for added control.</p>
@@ -195,6 +330,7 @@
     </footer>
 
     <script>
+        // Smooth scrolling
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -203,19 +339,32 @@
             });
         });
 
+        // Intersection Observer for staggered card animation
         const cards = document.querySelectorAll('.card');
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        let delay = 0;
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
+                    entry.target.style.transitionDelay = delay + 's';
+                    delay += 0.1;
                     entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, observerOptions);
 
-        cards.forEach(card => observer.observe(card));
+        cards.forEach((card) => {
+            observer.observe(card);
+        });
 
-        const navLinks = document.querySelectorAll('nav a');
+        // Active navigation highlighting
         const sections = document.querySelectorAll('.card');
+        const navLinks = document.querySelectorAll('nav a');
+
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -226,7 +375,20 @@
             });
         }, { threshold: 0.5 });
 
-        sections.forEach(section => sectionObserver.observe(section));
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Add CSS for active navigation link
+        const style = document.createElement('style');
+        style.textContent = `
+            nav a.active {
+                color: var(--accent-color);
+                font-weight: 700;
+                background: #f0faff;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
