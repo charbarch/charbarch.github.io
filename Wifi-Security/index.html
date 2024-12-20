@@ -30,6 +30,36 @@
             overflow-x: hidden;
         }
 
+        /* NAVIGATION BAR */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            z-index: 9999;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 10px 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        nav li {
+            display: inline-block;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--main-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
         /* HEADER */
         header {
             position: relative;
@@ -38,6 +68,7 @@
             padding: 80px 20px;
             text-align: center;
             overflow: hidden;
+            margin-top: 60px; /* to ensure header is below the navbar */
         }
 
         /* Pseudo-element with angled pattern and animation */
@@ -203,16 +234,30 @@
                 margin: -40px auto 20px auto;
                 padding: 30px 15px;
             }
+            nav ul {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="#wep">WEP</a></li>
+            <li><a href="#wpa">WPA</a></li>
+            <li><a href="#wpa2">WPA2</a></li>
+            <li><a href="#wpa3">WPA3</a></li>
+            <li><a href="#wps">WPS</a></li>
+            <li><a href="#macfiltering">MAC Filtering</a></li>
+        </ul>
+    </nav>
+
     <header>
         <h1><i class="fas fa-wifi"></i>Wi-Fi Security Essentials</h1>
     </header>
 
     <div class="container">
-        <div class="card">
+        <div class="card" id="wep">
             <h3><i class="fas fa-lock"></i> WEP (Wired Equivalent Privacy)</h3>
             <p><strong>What it is:</strong> WEP was one of the earliest security protocols for wireless networks, aiming to provide security comparable to wired connections.</p>
             <p><strong>Vulnerability:</strong> With weak encryption keys and reused IVs, WEP keys could be quickly derived. Tools like Aircrack-ng made it easy for attackers.</p>
@@ -221,7 +266,7 @@
             <p><strong>How it got patched:</strong> WEP was replaced by WPA and eventually WPA2, as its fundamental flaws couldn’t be simply patched.</p>
         </div>
 
-        <div class="card">
+        <div class="card" id="wpa">
             <h3><i class="fas fa-shield-alt"></i> WPA (Wi-Fi Protected Access)</h3>
             <p><strong>What it is:</strong> WPA was an interim solution replacing WEP. It introduced TKIP, making key changes more frequent.</p>
             <p><strong>Vulnerability:</strong> TKIP had weaknesses. Although more secure than WEP, WPA was still vulnerable to certain attacks.</p>
@@ -230,7 +275,7 @@
             <p><strong>How it got patched:</strong> WPA2 replaced WPA’s TKIP with AES, a stronger encryption method.</p>
         </div>
 
-        <div class="card">
+        <div class="card" id="wpa2">
             <h3><i class="fas fa-user-shield"></i> WPA2</h3>
             <p><strong>What it is:</strong> WPA2 introduced AES encryption, making it much harder to crack than WPA or WEP.</p>
             <p><strong>Key security features:</strong> Strong AES encryption and improved authentication methods.</p>
@@ -239,7 +284,7 @@
             <p><strong>Notes:</strong> Pure WPA2 (AES-only) avoids vulnerabilities introduced by TKIP/WPA fallback modes.</p>
         </div>
 
-        <div class="card">
+        <div class="card" id="wpa3">
             <h3><i class="fas fa-key"></i> WPA3</h3>
             <p><strong>What it is:</strong> The latest standard, WPA3, enhances Wi-Fi security with robust encryption even if users choose weaker passwords.</p>
             <p><strong>Key improvements:</strong> Individualized data encryption, improved brute-force resistance.</p>
@@ -247,7 +292,7 @@
             <p><strong>Tools:</strong> hcxdumptool, hashcat</p>
         </div>
 
-        <div class="card">
+        <div class="card" id="wps">
             <h3><i class="fas fa-plug"></i> WPS (Wi-Fi Protected Setup)</h3>
             <p><strong>What it is:</strong> Simplifies connecting devices without typing long passwords, using PINs or push-button methods.</p>
             <p><strong>Vulnerability:</strong> PIN-based WPS can be brute forced, making it a target.</p>
@@ -256,7 +301,7 @@
             <p><strong>Solution:</strong> Disable WPS if not needed.</p>
         </div>
 
-        <div class="card">
+        <div class="card" id="macfiltering">
             <h3><i class="fas fa-network-wired"></i> MAC Filtering</h3>
             <p><strong>What it is:</strong> Allows/denies devices by MAC address for added control.</p>
             <p><strong>Vulnerability:</strong> MAC addresses can be spoofed, so this is not a primary security measure.</p>
